@@ -20,8 +20,10 @@
 // --- Includes for TF2 Transformations ---
 #include "tf2_ros/buffer.h"
 #include "tf2_ros/transform_listener.h"
-#include "tf2_geometry_msgs/tf2_geometry_msgs.h"
+// #include "tf2_geometry_msgs/tf2_geometry_msgs.h"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 #include "tf2/utils.h" // For tf2::getYaw
+#include "nav_msgs/msg/occupancy_grid.hpp" // <--- ADD THIS
 // ----------------------------------------
 
 // ... (VoxelHasher struct is unchanged) ...
@@ -47,13 +49,15 @@ private:
     void publish_obstacle_circles();
     void plan_path(const geometry_msgs::msg::PoseStamped& current_start_pose);
     void publish_potential_field(const geometry_msgs::msg::PoseStamped& current_pose);
+    void publish_potential_heatmap(const geometry_msgs::msg::PoseStamped& current_pose);
     
     
 
     // --- New functions for dynamic goal planning ---
     void load_centerline_from_csv();
     void publish_centerline();
-    void publish_goal_marker();
+    // void publish_goal_marker();
+    void publish_goal_pose();      // <-- updated
 
     /**
      * @brief MODIFIED: Calculates and updates the dynamic goal pose.
@@ -80,8 +84,11 @@ private:
     rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr start_pose_subscription_;
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr lidar_subscription_; 
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr centerline_publisher_;
-    rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr goal_marker_publisher_;
+    // rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr goal_marker_publisher_;
     rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr potential_field_publisher_;
+    rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr heatmap_publisher_;
+    rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr goal_pose_publisher_;      // <-- new
+    rclcpp::Time last_heatmap_time_;
     std::string global_frame_ = "map";           // Planning frame
 
     // --- TF2 Members ---

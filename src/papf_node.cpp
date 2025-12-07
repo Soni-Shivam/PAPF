@@ -39,18 +39,25 @@ PAPFNode::PAPFNode() : Node("papf_node")
     this->declare_parameter<double>("papf.dt", 0.1);
     this->declare_parameter<int>("max_plan_steps", 500);
     this->declare_parameter<double>("goal_tolerance", 0.5);
+    auto lidar_cb_group = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+    rclcpp::SubscriptionOptions options;
+    options.callback_group = lidar_cb_group;
     path_publisher_ = this->create_publisher<nav_msgs::msg::Path>("planned_path", 10);
     obstacle_circles_publisher_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("/obstacle_circles", 10);
     centerline_publisher_ = this->create_publisher<nav_msgs::msg::Path>(
         "/centerline_path", rclcpp::QoS(1).transient_local());
-    goal_marker_publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("/dynamic_goal_marker", 10);
+    // goal_marker_publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("/dynamic_goal_marker", 10);
+    goal_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/dynamic_goal_pose", 10);
     start_pose_subscription_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
         "/initialpose", 10, std::bind(&PAPFNode::start_pose_callback, this, _1));
     lidar_subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
         "/scan", 
         rclcpp::SensorDataQoS(),
-        std::bind(&PAPFNode::lidar_callback, this, _1));
+        std::bind(&PAPFNode::lidar_callback, this, _1),
+        options); // <--- Pass the options here for parallel execution
     potential_field_publisher_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("/potential_field_vectors", 10);
+    last_heatmap_time_ = rclcpp::Time(0, 0, this->get_clock()->get_clock_type());
+    heatmap_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/potential_heatmap", 10);
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
     tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
     load_centerline_from_csv();
@@ -100,10 +107,58 @@ void PAPFNode::lidar_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
         return; 
     }
     update_dynamic_goal(msg, current_pose); 
-    publish_potential_field(current_pose);
-    publish_goal_marker();
+    // publish_potential_field(current_pose);
+    // publish_goal_marker();
+    publish_potential_heatmap(current_pose);
+    publish_goal_pose();
     try_to_plan_path(current_pose);
 }
+// void PAPFNode::update_dynamic_goal(
+//     const sensor_msgs::msg::LaserScan::SharedPtr scan_msg,
+//     const geometry_msgs::msg::PoseStamped& current_pose)
+// {
+//     if (centerline_points_.empty())
+//     {
+//         RCLCPP_WARN_ONCE(this->get_logger(), "Centerline is empty, cannot update dynamic goal.");
+//         return;
+//     }
+//     const double LOOKAHEAD_DISTANCE = this->get_parameter("lookahead_distance").as_double(); 
+//     Vector2D robot_pos(current_pose.pose.position.x, current_pose.pose.position.y);
+//     double min_dist_sq = std::numeric_limits<double>::max();
+//     int nearest_index = -1;
+//     for (size_t i = 0; i < centerline_points_.size(); ++i) {
+//         double dist_sq = centerline_points_[i].distanceToSquared(robot_pos);
+//         if (dist_sq < min_dist_sq) {
+//             min_dist_sq = dist_sq;
+//             nearest_index = i;
+//         }
+//     }
+//     if (nearest_index == -1) {
+//         return; 
+//     }
+//     int goal_index = nearest_index;
+//     for (size_t i = 0; i < centerline_points_.size(); ++i)
+//     {
+//         int test_index = (nearest_index + i) % centerline_points_.size();
+//         double dist_from_robot = centerline_points_[test_index].distanceTo(robot_pos);
+//         if (dist_from_robot > LOOKAHEAD_DISTANCE) {
+//             goal_index = test_index;
+//             break; 
+//         }
+//         goal_index = test_index;
+//     }
+//     const Vector2D& dynamic_goal = centerline_points_[goal_index];
+//     geometry_msgs::msg::PoseStamped goal_msg;
+//     goal_msg.header.frame_id = global_frame_;
+//     goal_msg.header.stamp = this->get_clock()->now();
+//     goal_msg.pose.position.x = dynamic_goal.x;
+//     goal_msg.pose.position.y = dynamic_goal.y;
+//     goal_msg.pose.orientation.w = 1.0; 
+//     goal_pose_ = goal_msg; 
+//     (void)scan_msg;
+// }
+
+
 void PAPFNode::update_dynamic_goal(
     const sensor_msgs::msg::LaserScan::SharedPtr scan_msg,
     const geometry_msgs::msg::PoseStamped& current_pose)
@@ -115,6 +170,8 @@ void PAPFNode::update_dynamic_goal(
     }
     const double LOOKAHEAD_DISTANCE = this->get_parameter("lookahead_distance").as_double(); 
     Vector2D robot_pos(current_pose.pose.position.x, current_pose.pose.position.y);
+
+    // 1. Find nearest point
     double min_dist_sq = std::numeric_limits<double>::max();
     int nearest_index = -1;
     for (size_t i = 0; i < centerline_points_.size(); ++i) {
@@ -124,27 +181,41 @@ void PAPFNode::update_dynamic_goal(
             nearest_index = i;
         }
     }
-    if (nearest_index == -1) {
-        return; 
-    }
+    if (nearest_index == -1) return; 
+
+    // 2. Find goal point ahead by distance
     int goal_index = nearest_index;
-    for (size_t i = 0; i < centerline_points_.size(); ++i)
-    {
+    for (size_t i = 0; i < centerline_points_.size(); ++i) {
         int test_index = (nearest_index + i) % centerline_points_.size();
         double dist_from_robot = centerline_points_[test_index].distanceTo(robot_pos);
         if (dist_from_robot > LOOKAHEAD_DISTANCE) {
             goal_index = test_index;
             break; 
         }
-        goal_index = test_index;
     }
-    const Vector2D& dynamic_goal = centerline_points_[goal_index];
+
+    // 3. Calculate Heading (Orientation) facing "next few points"
+    // We look 5 points ahead of the goal to get a stable tangent vector
+    int heading_lookahead = 5; 
+    int next_index = (goal_index + heading_lookahead) % centerline_points_.size();
+    
+    const Vector2D& p_goal = centerline_points_[goal_index];
+    const Vector2D& p_next = centerline_points_[next_index];
+
+    double yaw = atan2(p_next.y - p_goal.y, p_next.x - p_goal.x);
+
+    // 4. Create Goal Pose
     geometry_msgs::msg::PoseStamped goal_msg;
     goal_msg.header.frame_id = global_frame_;
     goal_msg.header.stamp = this->get_clock()->now();
-    goal_msg.pose.position.x = dynamic_goal.x;
-    goal_msg.pose.position.y = dynamic_goal.y;
-    goal_msg.pose.orientation.w = 1.0; 
+    goal_msg.pose.position.x = p_goal.x;
+    goal_msg.pose.position.y = p_goal.y;
+    
+    // Convert Yaw to Quaternion
+    tf2::Quaternion q;
+    q.setRPY(0, 0, yaw);
+    goal_msg.pose.orientation = tf2::toMsg(q);
+
     goal_pose_ = goal_msg; 
     (void)scan_msg;
 }
@@ -301,12 +372,92 @@ void PAPFNode::publish_potential_field(const geometry_msgs::msg::PoseStamped& cu
             marker.scale.y = 0.03;      
             marker.scale.z = 0.03;      
             marker.color.a = 0.8;
-            if (force_mag > 50.0) { marker.color.r = 1.0; marker.color.g = 0.0; marker.color.b = 0.0; }
+            if (force_mag > 0.0) { marker.color.r = 1.0; marker.color.g = 0.0; marker.color.b = 0.0; }
             else { marker.color.r = 0.0; marker.color.g = 1.0; marker.color.b = 1.0; }
             marker_array.markers.push_back(marker);
         }
     }
     potential_field_publisher_->publish(marker_array);
+}
+
+void PAPFNode::publish_potential_heatmap(const geometry_msgs::msg::PoseStamped& current_pose)
+{
+    if (!goal_pose_) return;
+
+    auto now = this->get_clock()->now();
+    if ((now - last_heatmap_time_).seconds() < 0.5) {
+        return;
+    }
+    last_heatmap_time_ = now;
+
+    // --- Heatmap Configuration ---
+    double width_m = 20.0;       // 10x10 meter box around robot
+    double height_m = 20.0;
+    double resolution = 0.15;     // 10cm per pixel (High resolution)
+    double max_force_viz = 20.0; // Force magnitude that corresponds to "100%" (Red)
+
+    int cells_x = static_cast<int>(width_m / resolution);
+    int cells_y = static_cast<int>(height_m / resolution);
+
+    nav_msgs::msg::OccupancyGrid grid;
+    grid.header.frame_id = global_frame_;
+    grid.header.stamp = this->get_clock()->now();
+    grid.info.resolution = resolution;
+    grid.info.width = cells_x;
+    grid.info.height = cells_y;
+    
+    // Center the grid on the robot
+    // Origin is bottom-left corner
+    grid.info.origin.position.x = current_pose.pose.position.x - (width_m / 2.0);
+    grid.info.origin.position.y = current_pose.pose.position.y - (height_m / 2.0);
+    grid.info.origin.position.z = 0.0;
+    grid.info.origin.orientation.w = 1.0;
+
+    grid.data.resize(cells_x * cells_y);
+
+    // --- Planner Setup (To Calculate Forces) ---
+    PAPF_Planner::Params params;
+    params.k_att = this->get_parameter("papf.k_att").as_double();
+    params.d_g = this->get_parameter("papf.d_g").as_double();
+    params.k_rep = this->get_parameter("papf.k_rep").as_double();
+    params.d_o = this->get_parameter("papf.d_o").as_double();
+    params.n = this->get_parameter("papf.n").as_int();
+    params.k_prd = this->get_parameter("papf.k_prd").as_double();
+    params.d_prd = this->get_parameter("papf.d_prd").as_double();
+    PAPF_Planner viz_planner(params);
+
+    Vector2D goal(goal_pose_->pose.position.x, goal_pose_->pose.position.y);
+    double robot_yaw = tf2::getYaw(current_pose.pose.orientation);
+
+    // --- Populate Grid ---
+    for (int y = 0; y < cells_y; ++y) {
+        for (int x = 0; x < cells_x; ++x) {
+            
+            // Calculate world coordinates of this pixel
+            double wx = grid.info.origin.position.x + (x * resolution) + (resolution / 2.0);
+            double wy = grid.info.origin.position.y + (y * resolution) + (resolution / 2.0);
+
+            USV phantom_usv;
+            phantom_usv.position.x = wx;
+            phantom_usv.position.y = wy;
+            phantom_usv.yaw = robot_yaw; // Assume robot orientation for predictive calculation
+            phantom_usv.velocity = 0.0;
+
+            // Get Force Magnitude
+            Vector2D net_force = viz_planner.getNetForce(phantom_usv, goal, obstacle_circles_);
+            double magnitude = net_force.magnitude();
+
+            // Map magnitude to 0-100 range for OccupancyGrid
+            // 0 = No Force (Free), 100 = Max Force (Lethal)
+            int intensity = static_cast<int>((magnitude / max_force_viz) * 100.0);
+            intensity = std::clamp(intensity, 0, 100);
+
+            // Store in grid (row-major order)
+            grid.data[y * cells_x + x] = static_cast<int8_t>(intensity);
+        }
+    }
+
+    heatmap_publisher_->publish(grid);
 }
 void PAPFNode::try_to_plan_path(const geometry_msgs::msg::PoseStamped& current_pose)
 {
@@ -419,33 +570,57 @@ void PAPFNode::publish_centerline()
     centerline_publisher_->publish(path_msg);
     RCLCPP_INFO(this->get_logger(), "Published centerline path to /centerline_path");
 }
-void PAPFNode::publish_goal_marker()
+// void PAPFNode::publish_goal_marker()
+// {
+//     if (!goal_pose_) {
+//         return;
+//     }
+//     visualization_msgs::msg::Marker marker;
+//     marker.header.frame_id = global_frame_;
+//     marker.header.stamp = this->get_clock()->now();
+//     marker.ns = "dynamic_goal";
+//     marker.id = 0; 
+//     marker.type = visualization_msgs::msg::Marker::SPHERE;
+//     marker.action = visualization_msgs::msg::Marker::ADD;
+//     marker.pose = goal_pose_->pose;
+//     marker.scale.x = 0.5;
+//     marker.scale.y = 0.5;
+//     marker.scale.z = 0.5;
+//     marker.color.r = 0.0;
+//     marker.color.g = 1.0;
+//     marker.color.b = 0.0;
+//     marker.color.a = 1.0; 
+//     marker.lifetime = rclcpp::Duration::from_seconds(0.5);
+//     goal_marker_publisher_->publish(marker);
+// }
+
+
+void PAPFNode::publish_goal_pose()
 {
     if (!goal_pose_) {
         return;
     }
-    visualization_msgs::msg::Marker marker;
-    marker.header.frame_id = global_frame_;
-    marker.header.stamp = this->get_clock()->now();
-    marker.ns = "dynamic_goal";
-    marker.id = 0; 
-    marker.type = visualization_msgs::msg::Marker::SPHERE;
-    marker.action = visualization_msgs::msg::Marker::ADD;
-    marker.pose = goal_pose_->pose;
-    marker.scale.x = 0.5;
-    marker.scale.y = 0.5;
-    marker.scale.z = 0.5;
-    marker.color.r = 0.0;
-    marker.color.g = 1.0;
-    marker.color.b = 0.0;
-    marker.color.a = 1.0; 
-    marker.lifetime = rclcpp::Duration::from_seconds(0.5);
-    goal_marker_publisher_->publish(marker);
+    // Update timestamp to current time so RViz displays it immediately
+    goal_pose_->header.stamp = this->get_clock()->now();
+    goal_pose_publisher_->publish(*goal_pose_);
 }
 int main(int argc, char * argv[])
 {
+    // rclcpp::init(argc, argv);
+    // rclcpp::spin(std::make_shared<PAPFNode>());
+    // rclcpp::shutdown();
+    // return 0;
+
     rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<PAPFNode>());
+    
+    auto node = std::make_shared<PAPFNode>();
+    
+    // Use a MultiThreadedExecutor so parameter services can run 
+    // even if the planner is busy calculating!
+    rclcpp::executors::MultiThreadedExecutor executor;
+    executor.add_node(node);
+    executor.spin();
+    
     rclcpp::shutdown();
     return 0;
 }
