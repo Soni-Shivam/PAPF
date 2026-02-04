@@ -1,6 +1,23 @@
 papf_node:
   ros__parameters:
 
+    # --- Frame IDs ---
+    global_frame: "map"           # Planning and output frame
+
+    # --- ROS 2 Topic Names ---
+    # Subscribers
+    topic_path_input: "/global_path"          # Input path from global planner
+    topic_initialpose: "/initialpose"         # Initial pose from RViz
+    topic_scan: "/scan"                       # LiDAR scan topic
+    
+    # Publishers
+    topic_planned_path: "/planned_path"       # Output trajectory
+    topic_centerline_viz: "/centerline_path"  # Visualization of input path
+    topic_obstacles_viz: "/obstacle_circles"  # Obstacle visualization
+    topic_goal_pose: "/dynamic_goal_pose"     # Current lookahead goal
+    topic_potential_field: "/potential_field_vectors"  # Potential field vectors
+    topic_heatmap: "/potential_heatmap"       # Potential field heatmap
+
     # --- Lookahead and Obstacle Detection ---
     # Increased for full-scale golf cart operation at higher speeds
     lookahead_distance: 15.0      # Increased from 10.0 (golf cart needs more lookahead)

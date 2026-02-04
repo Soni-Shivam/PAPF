@@ -8,6 +8,34 @@ using std::placeholders::_1;
 PAPFNode::PAPFNode() : Node("papf_node")
 {
     // Declare and get parameters
+    // Frame IDs and Topic Names
+    this->declare_parameter<std::string>("global_frame", "map");
+    this->declare_parameter<std::string>("topic_path_input", "/global_path");
+    this->declare_parameter<std::string>("topic_initialpose", "/initialpose");
+    this->declare_parameter<std::string>("topic_scan", "/scan");
+    this->declare_parameter<std::string>("topic_planned_path", "/planned_path");
+    this->declare_parameter<std::string>("topic_centerline_viz", "/centerline_path");
+    this->declare_parameter<std::string>("topic_obstacles_viz", "/obstacle_circles");
+    this->declare_parameter<std::string>("topic_goal_pose", "/dynamic_goal_pose");
+    this->declare_parameter<std::string>("topic_potential_field", "/potential_field_vectors");
+    this->declare_parameter<std::string>("topic_heatmap", "/potential_heatmap");
+    
+    // Get frame and topic parameters
+    this->get_parameter("global_frame", global_frame_);
+    std::string topic_path_input, topic_initialpose, topic_scan;
+    std::string topic_planned_path, topic_centerline_viz, topic_obstacles_viz;
+    std::string topic_goal_pose, topic_potential_field, topic_heatmap;
+    this->get_parameter("topic_path_input", topic_path_input);
+    this->get_parameter("topic_initialpose", topic_initialpose);
+    this->get_parameter("topic_scan", topic_scan);
+    this->get_parameter("topic_planned_path", topic_planned_path);
+    this->get_parameter("topic_centerline_viz", topic_centerline_viz);
+    this->get_parameter("topic_obstacles_viz", topic_obstacles_viz);
+    this->get_parameter("topic_goal_pose", topic_goal_pose);
+    this->get_parameter("topic_potential_field", topic_potential_field);
+    this->get_parameter("topic_heatmap", topic_heatmap);
+    
+    // Planning parameters
     this->declare_parameter<double>("lookahead_distance", 4.0);
     this->declare_parameter<double>("voxel_size", 0.1);
     this->declare_parameter<double>("obstacle_point_radius", 0.05);
@@ -32,32 +60,33 @@ PAPFNode::PAPFNode() : Node("papf_node")
     auto lidar_cb_group = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
     rclcpp::SubscriptionOptions options;
     options.callback_group = lidar_cb_group;
-    path_publisher_ = this->create_publisher<nav_msgs::msg::Path>("planned_path", 10);
-    obstacle_circles_publisher_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("/obstacle_circles", 10);
+    path_publisher_ = this->create_publisher<nav_msgs::msg::Path>(topic_planned_path, 10);
+    obstacle_circles_publisher_ = this->create_publisher<visualization_msgs::msg::MarkerArray>(topic_obstacles_viz, 10);
     centerline_publisher_ = this->create_publisher<nav_msgs::msg::Path>(
-        "/centerline_path", rclcpp::QoS(1).transient_local());
+        topic_centerline_viz, rclcpp::QoS(1).transient_local());
     // goal_marker_publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("/dynamic_goal_marker", 10);
-    goal_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/dynamic_goal_pose", 10);
+    goal_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(topic_goal_pose, 10);
     start_pose_subscription_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
-        "/initialpose", 10, std::bind(&PAPFNode::start_pose_callback, this, _1));
+        topic_initialpose, 10, std::bind(&PAPFNode::start_pose_callback, this, _1));
     lidar_subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-        "/scan", 
+        topic_scan, 
         rclcpp::SensorDataQoS(),
         std::bind(&PAPFNode::lidar_callback, this, _1),
         options); // <--- Pass the options here for parallel execution
-    potential_field_publisher_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("/potential_field_vectors", 10);
+    potential_field_publisher_ = this->create_publisher<visualization_msgs::msg::MarkerArray>(topic_potential_field, 10);
     last_heatmap_time_ = rclcpp::Time(0, 0, this->get_clock()->get_clock_type());
-    heatmap_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/potential_heatmap", 10);
+    heatmap_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>(topic_heatmap, 10);
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
     tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 
     // Subscribe to dynamic path topic
     path_subscription_ = this->create_subscription<nav_msgs::msg::Path>(
-        "/global_path",
+        topic_path_input,
         10,
         std::bind(&PAPFNode::path_callback, this, _1));
     
-    RCLCPP_INFO(this->get_logger(), "Subscribed to /global_path for dynamic path updates");
+    RCLCPP_INFO(this->get_logger(), "Subscribed to %s for dynamic path updates", topic_path_input.c_str());
+    RCLCPP_INFO(this->get_logger(), "Using frame: %s", global_frame_.c_str());
     RCLCPP_INFO(this->get_logger(), "PAPF Node has been started.");
     RCLCPP_INFO(this->get_logger(), "--- PAPF Parameters Loaded ---");
     RCLCPP_INFO(this->get_logger(), "  lookahead_distance: %.2f", this->get_parameter("lookahead_distance").as_double());

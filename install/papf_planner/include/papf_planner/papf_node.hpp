@@ -90,7 +90,7 @@ private:
     rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr heatmap_publisher_;
     rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr goal_pose_publisher_;      // <-- new
     rclcpp::Time last_heatmap_time_;
-    std::string global_frame_ = "map";           // Planning frame
+    std::string global_frame_;                   // Planning frame (from config)
 
     // --- TF2 Members ---
     std::shared_ptr<tf2_ros::Buffer> tf_buffer_;

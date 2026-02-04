@@ -1,0 +1,38 @@
+[0.008s] Invoking command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner -- -j16 -l16
+[0.050s] [ 50%] Built target papf_logic
+[0.063s] [35m[1mConsolidate compiler generated dependencies of target papf_node[0m
+[0.079s] [ 75%] [32mBuilding CXX object CMakeFiles/papf_node.dir/src/papf_node.cpp.o[0m
+[10.554s] [100%] [32m[1mLinking CXX executable papf_node[0m
+[11.149s] [100%] Built target papf_node
+[11.157s] Invoked command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner -- -j16 -l16
+[11.164s] Invoking command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner
+[11.173s] -- Install configuration: ""
+[11.173s] -- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/lib/papf_planner/papf_node
+[11.181s] -- Set runtime path of "/home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/lib/papf_planner/papf_node" to ""
+[11.181s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/racelines
+[11.181s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/racelines/centerline.csv
+[11.181s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include
+[11.181s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner
+[11.181s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner/PAPF_Planner.h
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner/Vector2D.h
+[11.182s] -- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner/papf_node.hpp
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/launch
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/launch/papf_planner.launch.py
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/config
+[11.182s] -- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/config/papf_params.yaml
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/ament_index/resource_index/package_run_dependencies/papf_planner
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/ament_index/resource_index/parent_prefix_path/papf_planner
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/ament_prefix_path.sh
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/ament_prefix_path.dsv
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/path.sh
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/path.dsv
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.bash
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.sh
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.zsh
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.dsv
+[11.182s] -- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/package.dsv
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/ament_index/resource_index/packages/papf_planner
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/cmake/papf_plannerConfig.cmake
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/cmake/papf_plannerConfig-version.cmake
+[11.182s] -- Up-to-date: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/package.xml
+[11.184s] Invoked command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner
