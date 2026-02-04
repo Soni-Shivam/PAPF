@@ -1,0 +1,35 @@
+[35m[1mConsolidate compiler generated dependencies of target papf_logic[0m
+[ 50%] Built target papf_logic
+[35m[1mConsolidate compiler generated dependencies of target papf_node[0m
+[ 75%] [32mBuilding CXX object CMakeFiles/papf_node.dir/src/papf_node.cpp.o[0m
+[100%] [32m[1mLinking CXX executable papf_node[0m
+[100%] Built target papf_node
+-- Install configuration: ""
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/lib/papf_planner/papf_node
+-- Set runtime path of "/home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/lib/papf_planner/papf_node" to ""
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/racelines
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/racelines/centerline.csv
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner/PAPF_Planner.h
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner/Vector2D.h
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/include/papf_planner/papf_node.hpp
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/launch
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/launch/papf_planner.launch.py
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/config
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/config/papf_params.yaml
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/ament_index/resource_index/package_run_dependencies/papf_planner
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/ament_index/resource_index/parent_prefix_path/papf_planner
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/ament_prefix_path.sh
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/ament_prefix_path.dsv
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/path.sh
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/environment/path.dsv
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.bash
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.sh
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.zsh
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/local_setup.dsv
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/package.dsv
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/ament_index/resource_index/packages/papf_planner
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/cmake/papf_plannerConfig.cmake
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/cmake/papf_plannerConfig-version.cmake
+-- Installing: /home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner/share/papf_planner/package.xml

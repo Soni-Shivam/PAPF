@@ -1,0 +1,141 @@
+[0.000000] (-) TimerEvent: {}
+[0.000126] (papf_planner) JobQueued: {'identifier': 'papf_planner', 'dependencies': OrderedDict()}
+[0.000165] (papf_planner) JobStarted: {'identifier': 'papf_planner'}
+[0.006338] (papf_planner) JobProgress: {'identifier': 'papf_planner', 'progress': 'cmake'}
+[0.006771] (papf_planner) Command: {'cmd': ['/usr/bin/cmake', '/home/shivam/code-masala/papf_buggy/PAPF', '-DCMAKE_INSTALL_PREFIX=/home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner'], 'cwd': '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LANGUAGE', 'en_IN:en'), ('USER', 'shivam'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/antigravity/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/shivam'), ('OLDPWD', '/home/shivam/code-masala/papf_buggy/PAPF'), ('CHROME_DESKTOP', 'antigravity.desktop'), ('LESS', '-R'), ('ANTIGRAVITY_CLI_ALIAS', 'agy'), ('DESKTOP_SESSION', 'ubuntu'), ('NVM_BIN', '/home/shivam/.nvm/versions/node/v22.17.0/bin'), ('TERM_PROGRAM_VERSION', '1.104.0'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/antigravity.desktop'), ('ZSH', '/home/shivam/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('NVM_INC', '/home/shivam/.nvm/versions/node/v22.17.0/include/node'), ('GTK_MODULES', 'gail:atk-bridge'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('PAGER', 'cat'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/antigravity/resources/app/extensions/git/dist/askpass-main.js'), ('MANAGERPID', '1972'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/antigravity/antigravity'), ('SYSTEMD_EXEC_PID', '2154'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('VSCODE_PYTHON_AUTOACTIVATE_GUARD', '1'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '19605'), ('ANTIGRAVITY_AGENT', '1'), ('COLORTERM', 'truecolor'), ('NVM_DIR', '/home/shivam/.nvm'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'shivam'), ('_', '/usr/bin/colcon'), ('JOURNAL_STREAM', '8:9764'), ('XDG_SESSION_CLASS', 'user'), ('ROS_VERSION', '2'), ('USER_ZDOTDIR', '/home/shivam'), ('USERNAME', 'shivam'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '[/home/shivam/.nvm/versions/node/v24.13.0/bin/npm]:/opt/ros/humble/bin:[/home/shivam/.nvm/versions/node/v22.17.0/bin:/home/shivam/.nvm/versions/node/v22.17.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/shivam/.local/bin:/home/shivam/.local/bin'), ('SESSION_MANAGER', 'local/PLUTO:@/tmp/.ICE-unix/2127,unix/PLUTO:/tmp/.ICE-unix/2127'), ('INVOCATION_ID', 'e58b6869bf714924a0d55f2e8464f00d'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('VSCODE_INJECTION', '1'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ZETHK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('TERM_PROGRAM', 'vscode'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-227f514627.sock'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('ROS_DOMAIN_ID', '10'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/usr/bin/zsh'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('LC_ALL', 'en_US.UTF-8'), ('PWD', '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner'), ('XDG_DATA_DIRS', '/home/shivam/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('NVM_CD_FLAGS', '-q'), ('ZDOTDIR', '/home/shivam'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.091127] (papf_planner) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.099557] (-) TimerEvent: {}
+[0.161504] (papf_planner) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.168611] (papf_planner) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.199662] (-) TimerEvent: {}
+[0.237576] (papf_planner) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.252298] (papf_planner) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.253531] (papf_planner) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.254243] (papf_planner) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.257777] (papf_planner) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.299757] (-) TimerEvent: {}
+[0.333135] (papf_planner) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.338091] (papf_planner) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.338262] (papf_planner) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.338710] (papf_planner) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.343240] (papf_planner) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.399860] (-) TimerEvent: {}
+[0.500243] (-) TimerEvent: {}
+[0.600806] (-) TimerEvent: {}
+[0.701082] (-) TimerEvent: {}
+[0.801470] (-) TimerEvent: {}
+[0.852699] (papf_planner) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.901533] (-) TimerEvent: {}
+[0.939826] (papf_planner) StdoutLine: {'line': b'-- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.979170] (papf_planner) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.983613] (papf_planner) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.991514] (papf_planner) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.001600] (-) TimerEvent: {}
+[1.003017] (papf_planner) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.016825] (papf_planner) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.055162] (papf_planner) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.057740] (papf_planner) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.101773] (-) TimerEvent: {}
+[1.153896] (papf_planner) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[1.181228] (papf_planner) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[1.201987] (-) TimerEvent: {}
+[1.213267] (papf_planner) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[1.221877] (papf_planner) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[1.298265] (papf_planner) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[1.298477] (papf_planner) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[1.302064] (-) TimerEvent: {}
+[1.367888] (papf_planner) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[1.368739] (papf_planner) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[1.402169] (-) TimerEvent: {}
+[1.412824] (papf_planner) StdoutLine: {'line': b'-- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)\n'}
+[1.424071] (papf_planner) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[1.438419] (papf_planner) StdoutLine: {'line': b'-- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[1.471354] (papf_planner) StdoutLine: {'line': b'-- Found tf2: 0.25.18 (/opt/ros/humble/share/tf2/cmake)\n'}
+[1.480142] (papf_planner) StdoutLine: {'line': b'-- Found tf2_ros: 0.25.18 (/opt/ros/humble/share/tf2_ros/cmake)\n'}
+[1.502353] (-) TimerEvent: {}
+[1.552984] (papf_planner) StdoutLine: {'line': b'-- Found tf2_geometry_msgs: 0.25.18 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)\n'}
+[1.564192] (papf_planner) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[1.565332] (papf_planner) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[1.565499] (papf_planner) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[1.602539] (-) TimerEvent: {}
+[1.613187] (papf_planner) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.621917] (papf_planner) StdoutLine: {'line': b'-- Generating done\n'}
+[1.625235] (papf_planner) StdoutLine: {'line': b'-- Build files have been written to: /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner\n'}
+[1.633376] (papf_planner) CommandEnded: {'returncode': 0}
+[1.634867] (papf_planner) JobProgress: {'identifier': 'papf_planner', 'progress': 'build'}
+[1.634887] (papf_planner) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner', '--', '-j16', '-l16'], 'cwd': '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LANGUAGE', 'en_IN:en'), ('USER', 'shivam'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/antigravity/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/shivam'), ('OLDPWD', '/home/shivam/code-masala/papf_buggy/PAPF'), ('CHROME_DESKTOP', 'antigravity.desktop'), ('LESS', '-R'), ('ANTIGRAVITY_CLI_ALIAS', 'agy'), ('DESKTOP_SESSION', 'ubuntu'), ('NVM_BIN', '/home/shivam/.nvm/versions/node/v22.17.0/bin'), ('TERM_PROGRAM_VERSION', '1.104.0'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/antigravity.desktop'), ('ZSH', '/home/shivam/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('NVM_INC', '/home/shivam/.nvm/versions/node/v22.17.0/include/node'), ('GTK_MODULES', 'gail:atk-bridge'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('PAGER', 'cat'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/antigravity/resources/app/extensions/git/dist/askpass-main.js'), ('MANAGERPID', '1972'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/antigravity/antigravity'), ('SYSTEMD_EXEC_PID', '2154'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('VSCODE_PYTHON_AUTOACTIVATE_GUARD', '1'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '19605'), ('ANTIGRAVITY_AGENT', '1'), ('COLORTERM', 'truecolor'), ('NVM_DIR', '/home/shivam/.nvm'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'shivam'), ('_', '/usr/bin/colcon'), ('JOURNAL_STREAM', '8:9764'), ('XDG_SESSION_CLASS', 'user'), ('ROS_VERSION', '2'), ('USER_ZDOTDIR', '/home/shivam'), ('USERNAME', 'shivam'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '[/home/shivam/.nvm/versions/node/v24.13.0/bin/npm]:/opt/ros/humble/bin:[/home/shivam/.nvm/versions/node/v22.17.0/bin:/home/shivam/.nvm/versions/node/v22.17.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/shivam/.local/bin:/home/shivam/.local/bin'), ('SESSION_MANAGER', 'local/PLUTO:@/tmp/.ICE-unix/2127,unix/PLUTO:/tmp/.ICE-unix/2127'), ('INVOCATION_ID', 'e58b6869bf714924a0d55f2e8464f00d'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('VSCODE_INJECTION', '1'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ZETHK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('TERM_PROGRAM', 'vscode'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-227f514627.sock'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('ROS_DOMAIN_ID', '10'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/usr/bin/zsh'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('LC_ALL', 'en_US.UTF-8'), ('PWD', '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner'), ('XDG_DATA_DIRS', '/home/shivam/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('NVM_CD_FLAGS', '-q'), ('ZDOTDIR', '/home/shivam'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[1.677475] (papf_planner) StdoutLine: {'line': b'[ 25%] \x1b[32mBuilding CXX object CMakeFiles/papf_logic.dir/src/PAPF_Planner.cpp.o\x1b[0m\n'}
+[1.702732] (-) TimerEvent: {}
+[1.802963] (-) TimerEvent: {}
+[1.903211] (-) TimerEvent: {}
+[1.906754] (papf_planner) StdoutLine: {'line': b'[ 50%] \x1b[32m\x1b[1mLinking CXX static library libpapf_logic.a\x1b[0m\n'}
+[1.938758] (papf_planner) StdoutLine: {'line': b'[ 50%] Built target papf_logic\n'}
+[1.967079] (papf_planner) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/papf_node.dir/src/papf_node.cpp.o\x1b[0m\n'}
+[2.003309] (-) TimerEvent: {}
+[2.103568] (-) TimerEvent: {}
+[2.203819] (-) TimerEvent: {}
+[2.304159] (-) TimerEvent: {}
+[2.404513] (-) TimerEvent: {}
+[2.504829] (-) TimerEvent: {}
+[2.605147] (-) TimerEvent: {}
+[2.705477] (-) TimerEvent: {}
+[2.805805] (-) TimerEvent: {}
+[2.906067] (-) TimerEvent: {}
+[3.006413] (-) TimerEvent: {}
+[3.106668] (-) TimerEvent: {}
+[3.207003] (-) TimerEvent: {}
+[3.307363] (-) TimerEvent: {}
+[3.407670] (-) TimerEvent: {}
+[3.508025] (-) TimerEvent: {}
+[3.608376] (-) TimerEvent: {}
+[3.708647] (-) TimerEvent: {}
+[3.808981] (-) TimerEvent: {}
+[3.902044] (papf_planner) StderrLine: {'line': b'\x1b[01m\x1b[K/home/shivam/code-masala/papf_buggy/PAPF/src/papf_node.cpp:548:6:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno declaration matches \xe2\x80\x98\x1b[01m\x1b[Kvoid PAPFNode::load_centerline_from_csv()\x1b[m\x1b[K\xe2\x80\x99\n'}
+[3.902242] (papf_planner) StderrLine: {'line': b'  548 | void \x1b[01;31m\x1b[KPAPFNode\x1b[m\x1b[K::load_centerline_from_csv()\n'}
+[3.902286] (papf_planner) StderrLine: {'line': b'      |      \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[3.902319] (papf_planner) StderrLine: {'line': b'\x1b[01m\x1b[K/home/shivam/code-masala/papf_buggy/PAPF/src/papf_node.cpp:548:6:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kno functions named \xe2\x80\x98\x1b[01m\x1b[Kvoid PAPFNode::load_centerline_from_csv()\x1b[m\x1b[K\xe2\x80\x99\n'}
+[3.902350] (papf_planner) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/shivam/code-masala/papf_buggy/PAPF/src/papf_node.cpp:1\x1b[m\x1b[K:\n'}
+[3.902380] (papf_planner) StderrLine: {'line': b'\x1b[01m\x1b[K/home/shivam/code-masala/papf_buggy/PAPF/include/papf_planner/papf_node.hpp:37:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kclass PAPFNode\x1b[m\x1b[K\xe2\x80\x99 defined here\n'}
+[3.902411] (papf_planner) StderrLine: {'line': b'   37 | class \x1b[01;36m\x1b[KPAPFNode\x1b[m\x1b[K : public rclcpp::Node\n'}
+[3.902440] (papf_planner) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[3.909130] (-) TimerEvent: {}
+[4.009422] (-) TimerEvent: {}
+[4.109794] (-) TimerEvent: {}
+[4.210091] (-) TimerEvent: {}
+[4.310395] (-) TimerEvent: {}
+[4.410621] (-) TimerEvent: {}
+[4.510960] (-) TimerEvent: {}
+[4.611295] (-) TimerEvent: {}
+[4.711616] (-) TimerEvent: {}
+[4.811968] (-) TimerEvent: {}
+[4.912286] (-) TimerEvent: {}
+[5.012650] (-) TimerEvent: {}
+[5.112969] (-) TimerEvent: {}
+[5.213299] (-) TimerEvent: {}
+[5.313657] (-) TimerEvent: {}
+[5.413998] (-) TimerEvent: {}
+[5.514319] (-) TimerEvent: {}
+[5.614636] (-) TimerEvent: {}
+[5.714880] (-) TimerEvent: {}
+[5.815126] (-) TimerEvent: {}
+[5.915441] (-) TimerEvent: {}
+[6.015765] (-) TimerEvent: {}
+[6.116016] (-) TimerEvent: {}
+[6.216265] (-) TimerEvent: {}
+[6.316531] (-) TimerEvent: {}
+[6.416866] (-) TimerEvent: {}
+[6.517225] (-) TimerEvent: {}
+[6.617551] (-) TimerEvent: {}
+[6.717875] (-) TimerEvent: {}
+[6.818206] (-) TimerEvent: {}
+[6.918575] (-) TimerEvent: {}
+[7.018960] (-) TimerEvent: {}
+[7.119254] (-) TimerEvent: {}
+[7.219570] (-) TimerEvent: {}
+[7.315239] (papf_planner) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/papf_node.dir/build.make:76: CMakeFiles/papf_node.dir/src/papf_node.cpp.o] Error 1\n'}
+[7.315409] (papf_planner) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:165: CMakeFiles/papf_node.dir/all] Error 2\n'}
+[7.315449] (papf_planner) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[7.317431] (papf_planner) CommandEnded: {'returncode': 2}
+[7.319624] (-) TimerEvent: {}
+[7.325951] (papf_planner) JobEnded: {'identifier': 'papf_planner', 'rc': 2}
+[7.336380] (-) EventReactorShutdown: {}

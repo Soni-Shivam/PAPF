@@ -7,17 +7,7 @@
 using std::placeholders::_1;
 PAPFNode::PAPFNode() : Node("papf_node")
 {
-    std::string package_share_path;
-    try {
-        package_share_path = ament_index_cpp::get_package_share_directory("papf_planner");
-    } catch (const std::exception & e) {
-        RCLCPP_ERROR(this->get_logger(), "Could not find package 'papf_planner': %s", e.what());
-    }
-    this->declare_parameter<std::string>("centerline_filename", "centerline.csv");
-    std::string csv_filename;
-    this->get_parameter("centerline_filename", csv_filename);
-    centerline_csv_path_ = package_share_path + "/racelines/" + csv_filename;
-    RCLCPP_INFO(this->get_logger(), "Loading centerline from: %s", centerline_csv_path_.c_str());
+    // Declare and get parameters
     this->declare_parameter<double>("lookahead_distance", 4.0);
     this->declare_parameter<double>("voxel_size", 0.1);
     this->declare_parameter<double>("obstacle_point_radius", 0.05);
@@ -60,8 +50,14 @@ PAPFNode::PAPFNode() : Node("papf_node")
     heatmap_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/potential_heatmap", 10);
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
     tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
-    load_centerline_from_csv();
-    publish_centerline();
+
+    // Subscribe to dynamic path topic
+    path_subscription_ = this->create_subscription<nav_msgs::msg::Path>(
+        "/global_path",
+        10,
+        std::bind(&PAPFNode::path_callback, this, _1));
+    
+    RCLCPP_INFO(this->get_logger(), "Subscribed to /global_path for dynamic path updates");
     RCLCPP_INFO(this->get_logger(), "PAPF Node has been started.");
     RCLCPP_INFO(this->get_logger(), "--- PAPF Parameters Loaded ---");
     RCLCPP_INFO(this->get_logger(), "  lookahead_distance: %.2f", this->get_parameter("lookahead_distance").as_double());
@@ -83,6 +79,36 @@ void PAPFNode::start_pose_callback(const geometry_msgs::msg::PoseWithCovarianceS
     planning_enabled_ = true;
     (void)msg; 
 }
+
+void PAPFNode::path_callback(const nav_msgs::msg::Path::SharedPtr msg)
+{
+    if (msg->poses.empty()) {
+        RCLCPP_WARN(this->get_logger(), "Received empty path message");
+        return;
+    }
+
+    // Clear existing centerline points
+    centerline_points_.clear();
+
+    // Convert Path message to centerline points
+    for (const auto& pose : msg->poses) {
+        centerline_points_.emplace_back(
+            pose.pose.position.x,
+            pose.pose.position.y
+        );
+    }
+
+    path_received_ = true;
+    
+    RCLCPP_INFO(this->get_logger(), 
+        "Received new path with %zu points from %s", 
+        centerline_points_.size(),
+        msg->header.frame_id.c_str());
+
+    // Publish the received path for visualization
+    publish_centerline();
+}
+
 void PAPFNode::lidar_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 {
     update_obstacles_from_scan(msg); 
@@ -165,7 +191,12 @@ void PAPFNode::update_dynamic_goal(
 {
     if (centerline_points_.empty())
     {
-        RCLCPP_WARN_ONCE(this->get_logger(), "Centerline is empty, cannot update dynamic goal.");
+        if (!path_received_) {
+            RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 5000, 
+                "Waiting for path on /global_path topic...");
+        } else {
+            RCLCPP_WARN_ONCE(this->get_logger(), "Path is empty, cannot update dynamic goal.");
+        }
         return;
     }
     const double LOOKAHEAD_DISTANCE = this->get_parameter("lookahead_distance").as_double(); 
@@ -514,42 +545,8 @@ void PAPFNode::plan_path(const geometry_msgs::msg::PoseStamped& current_start_po
     RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 1000, 
         "Published planned path with %zu poses.", path_msg.poses.size());
 }
-void PAPFNode::load_centerline_from_csv()
-{
-    std::ifstream file(centerline_csv_path_);
-    if (!file.is_open()) {
-        RCLCPP_ERROR(this->get_logger(), "Failed to open centerline file: %s", 
-            centerline_csv_path_.c_str());
-        return;
-    }
-    centerline_points_.clear();
-    std::string line;
-    std::getline(file, line); 
-    RCLCPP_INFO(this->get_logger(), "Skipped header line: %s", line.c_str());
-    while (std::getline(file, line))
-    {
-        std::stringstream ss(line);
-        std::string x_str, y_str;
-        double x, y;
-        if (!std::getline(ss, x_str, ',')) {
-            continue; 
-        }
-        if (!std::getline(ss, y_str, ',')) {
-            continue; 
-        }
-        try {
-            x = std::stod(x_str);
-            y = std::stod(y_str);
-        } catch (const std::invalid_argument& e) {
-            RCLCPP_WARN(this->get_logger(), "Skipping non-numeric line: %s. Error: %s", line.c_str(), e.what());
-            continue; 
-        }
-        centerline_points_.emplace_back(x, y);
-    }
-    RCLCPP_INFO(this->get_logger(), "Successfully loaded %zu points from centerline file.", 
-        centerline_points_.size());
-    file.close();
-}
+// CSV loading function removed - now using dynamic path from ROS 2 topic
+
 void PAPFNode::publish_centerline()
 {
     if (centerline_points_.empty()) {

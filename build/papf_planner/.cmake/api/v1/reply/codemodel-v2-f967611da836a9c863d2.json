@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-917a9a3d0ef6e8830a8b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "papf_planner",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "papf_logic::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-papf_logic-f4eeb3cb37bb6342bcfd.json",
+					"name" : "papf_logic",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "papf_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-papf_node-ac0bee6533e6a377c4f5.json",
+					"name" : "papf_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "papf_planner_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-papf_planner_uninstall-8cf61591207b910e8447.json",
+					"name" : "papf_planner_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-d37b9f0782a56a0bdfcc.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner",
+		"source" : "/home/shivam/code-masala/papf_buggy/PAPF"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

@@ -1,0 +1,61 @@
+[0.007s] Invoking command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/shivam/code-masala/papf_buggy/PAPF -DCMAKE_INSTALL_PREFIX=/home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner
+[0.091s] -- The C compiler identification is GNU 11.4.0
+[0.161s] -- The CXX compiler identification is GNU 11.4.0
+[0.169s] -- Detecting C compiler ABI info
+[0.238s] -- Detecting C compiler ABI info - done
+[0.252s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.253s] -- Detecting C compile features
+[0.254s] -- Detecting C compile features - done
+[0.258s] -- Detecting CXX compiler ABI info
+[0.333s] -- Detecting CXX compiler ABI info - done
+[0.338s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.338s] -- Detecting CXX compile features
+[0.339s] -- Detecting CXX compile features - done
+[0.343s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.853s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.940s] -- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+[0.979s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.984s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.991s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.003s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.017s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.055s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.058s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.154s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.181s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.213s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.222s] -- Looking for pthread.h
+[1.298s] -- Looking for pthread.h - found
+[1.298s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.368s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.369s] -- Found Threads: TRUE  
+[1.413s] -- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)
+[1.424s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[1.438s] -- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)
+[1.471s] -- Found tf2: 0.25.18 (/opt/ros/humble/share/tf2/cmake)
+[1.480s] -- Found tf2_ros: 0.25.18 (/opt/ros/humble/share/tf2_ros/cmake)
+[1.553s] -- Found tf2_geometry_msgs: 0.25.18 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[1.564s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[1.565s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[1.565s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[1.613s] -- Configuring done
+[1.622s] -- Generating done
+[1.625s] -- Build files have been written to: /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner
+[1.634s] Invoked command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/shivam/code-masala/papf_buggy/PAPF -DCMAKE_INSTALL_PREFIX=/home/shivam/code-masala/papf_buggy/PAPF/install/papf_planner
+[1.635s] Invoking command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner -- -j16 -l16
+[1.677s] [ 25%] [32mBuilding CXX object CMakeFiles/papf_logic.dir/src/PAPF_Planner.cpp.o[0m
+[1.907s] [ 50%] [32m[1mLinking CXX static library libpapf_logic.a[0m
+[1.939s] [ 50%] Built target papf_logic
+[1.967s] [ 75%] [32mBuilding CXX object CMakeFiles/papf_node.dir/src/papf_node.cpp.o[0m
+[3.902s] [01m[K/home/shivam/code-masala/papf_buggy/PAPF/src/papf_node.cpp:548:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid PAPFNode::load_centerline_from_csv()[m[K’
+[3.902s]   548 | void [01;31m[KPAPFNode[m[K::load_centerline_from_csv()
+[3.902s]       |      [01;31m[K^~~~~~~~[m[K
+[3.902s] [01m[K/home/shivam/code-masala/papf_buggy/PAPF/src/papf_node.cpp:548:6:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Kvoid PAPFNode::load_centerline_from_csv()[m[K’
+[3.902s] In file included from [01m[K/home/shivam/code-masala/papf_buggy/PAPF/src/papf_node.cpp:1[m[K:
+[3.902s] [01m[K/home/shivam/code-masala/papf_buggy/PAPF/include/papf_planner/papf_node.hpp:37:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass PAPFNode[m[K’ defined here
+[3.902s]    37 | class [01;36m[KPAPFNode[m[K : public rclcpp::Node
+[3.902s]       |       [01;36m[K^~~~~~~~[m[K
+[7.315s] gmake[2]: *** [CMakeFiles/papf_node.dir/build.make:76: CMakeFiles/papf_node.dir/src/papf_node.cpp.o] Error 1
+[7.315s] gmake[1]: *** [CMakeFiles/Makefile2:165: CMakeFiles/papf_node.dir/all] Error 2
+[7.315s] gmake: *** [Makefile:146: all] Error 2
+[7.317s] Invoked command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner -- -j16 -l16

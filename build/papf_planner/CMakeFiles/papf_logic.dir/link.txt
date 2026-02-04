@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpapf_logic.a CMakeFiles/papf_logic.dir/src/PAPF_Planner.cpp.o
+/usr/bin/ranlib libpapf_logic.a

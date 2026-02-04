@@ -1,0 +1,4 @@
+Invoking command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner -- -j16 -l16
+Invoked command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner -- -j16 -l16
+Invoking command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner
+Invoked command in '/home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/shivam/code-masala/papf_buggy/PAPF/build/papf_planner
